@@ -1,21 +1,22 @@
 var searchYouTube = (options, callback) => {
   // TODO
   $.ajax({
+    url: 'https://www.googleapis.com/youtube/v3/search?type=video&part=snippet&key=' + options.key + '&q=' 
+    + options.query + '&maxResults=' + options.max,
     type: 'GET',
-    url: 'https://www.googleapis.com/youtube/v3/search',
     // key: options.key,
     // q: options.query,
     // maxResults: options.max,
     // dataType: 'jsonp',
 
-    videoEmbeddable: true,
-    success: function() {
+    // videoEmbeddable: true,
+    success: function(data) {
       console.log('IT WORKED');
-      callback();
+      console.log(data.items);
+      callback(data.items);
     },
-    error: function() {
+    error: function(data) {
       console.log(':(');
-      console.log(options);
     }
   });
 
