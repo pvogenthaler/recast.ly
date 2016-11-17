@@ -22,26 +22,28 @@ class App extends React.Component {
     };
   }
   click(video) {
-    console.log('clicked');
+    // console.log('clicked');
     this.setState({
       currentVideo: video
     });
   }
-  searchClick(event) {
+  searchKeystroke(event) {
     this.setState({
       value: event.target.value
     });
-    console.log(window.searchYouTube);
-    // window.searchYouTube({query: this.state.input, key: window.YOUTUBE_API_KEY, maxResults: 5}, (data) => {
-    //   this.setState({videos: data});
-    // });
+    // console.log(event.target.value);
+    console.log({query: this.state.value, key: window.YOUTUBE_API_KEY, maxResults: 5});
+    
+    window.searchYouTube({query: this.state.value, key: window.YOUTUBE_API_KEY, maxResults: 5}, (data) => {
+      this.setState({videos: data});
+    });
   }
   render() {
 
 // pass click to video list entry
     return (
       <div>
-        <Nav searchClick={this.searchClick.bind(this)} />
+        <Nav search1={this.searchKeystroke.bind(this)} />
         <div className="col-md-7">
           <VideoPlayer 
             // video = {window.exampleVideoData[0]} 
