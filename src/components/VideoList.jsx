@@ -1,10 +1,26 @@
 var VideoList = (props) => (
   <div className="video-list media">
     {props.videos.map(video =>
-      <VideoListEntry video={video}/>
+      <VideoListEntry video={video} click={props.click} />
     )}
   </div>
 );
+
+
+// class VideoList extends App {
+//   constructor(props) {
+//     super(props);
+//   }
+//   render() {
+//     return (
+//       <div className="video-list media">
+//         {props.videos.map(video =>
+//           <VideoListEntry video={video}/>
+//         )}
+//       </div>
+//     );
+//   }
+// }
 
 
 // PropTypes tell other developers what `props` a component expects
