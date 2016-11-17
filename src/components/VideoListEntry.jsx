@@ -8,10 +8,7 @@ var VideoListEntry = (props) => (
     <div className="media-body">
     <div className="video-list-entry-title" 
       onClick={() => props.click.call(null, props.video)}>{props.video.snippet.title}</div>
-    <div className="video-list-entry-detail"
-      onClick={() => props.click.call(null, props.video)}>
-
-      >{props.video.snippet.description}</div>
+    <div className="video-list-entry-detail">{props.video.snippet.description}</div>
     </div>
   </div>
 );
