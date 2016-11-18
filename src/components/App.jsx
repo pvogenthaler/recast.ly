@@ -25,7 +25,9 @@ class App extends React.Component {
   }
 
   searchKeystroke(event) {
-    window.searchYouTube({query: event.target.value, key: window.YOUTUBE_API_KEY, maxResults: 5}, 
+    var temp = event.target;
+    _.debounce(() => (
+      window.searchYouTube({query: temp.value, key: window.YOUTUBE_API_KEY, maxResults: 5}, 
       (data) => {
         this.setState({
           videos: data
@@ -33,7 +35,7 @@ class App extends React.Component {
         this.setState({
           currentVideo: this.state.videos[0]
         });
-      });
+      })), 500).call();
   }
 
   render() {
