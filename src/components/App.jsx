@@ -1,59 +1,52 @@
-// var App = () => (
-//   <div>
-//     <Nav />
-//     <div className="col-md-7">
-//       <VideoPlayer video = {window.exampleVideoData[0]}/>
-//     </div>
-//     <div className="col-md-5">
-//       <VideoList videos = {window.exampleVideoData}/>
-//     </div>
-//   </div>
-// );
-
-
-
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {      // 2 states, search/ video list and video player
+    this.state = {      
       currentVideo: window.exampleVideoData[0],
       videos: window.exampleVideoData,
       value: 'cat'
     };
+
+    window.searchYouTube({query: this.state.value, key: window.YOUTUBE_API_KEY, maxResults: 5}, 
+      (data) => {
+        this.setState({
+          videos: data
+        });
+        this.setState({
+          currentVideo: this.state.videos[0]
+        });
+      });
   }
+
   click(video) {
-    // console.log('clicked');
     this.setState({
       currentVideo: video
     });
   }
-  searchKeystroke(event) {
-    this.setState({
-      value: event.target.value
-    });
-    // console.log(event.target.value);
-    console.log({query: this.state.value, key: window.YOUTUBE_API_KEY, maxResults: 5});
-    
-    window.searchYouTube({query: this.state.value, key: window.YOUTUBE_API_KEY, maxResults: 5}, (data) => {
-      this.setState({videos: data});
-    });
-  }
-  render() {
 
-// pass click to video list entry
+  searchKeystroke(event) {
+    window.searchYouTube({query: event.target.value, key: window.YOUTUBE_API_KEY, maxResults: 5}, 
+      (data) => {
+        this.setState({
+          videos: data
+        });
+        this.setState({
+          currentVideo: this.state.videos[0]
+        });
+      });
+  }
+
+  render() {
     return (
       <div>
         <Nav search1={this.searchKeystroke.bind(this)} />
         <div className="col-md-7">
           <VideoPlayer 
-            // video = {window.exampleVideoData[0]} 
             video={this.state.currentVideo}
-
             />
         </div>
         <div className="col-md-5">
           <VideoList 
-            // videos={window.exampleVideoData}
             videos={this.state.videos} 
             click={this.click.bind(this)} 
             />     
@@ -62,13 +55,6 @@ class App extends React.Component {
     );
   }
 }
-
-
-
-
-
-
-
 
 
 

@@ -10,9 +10,9 @@ var searchYouTube = (options, callback) => {
       maxResults: options.max,
     },
     success: function(data) {
-      console.log('IT WORKED');
+      // console.log('IT WORKED');
       // console.log(data);
-      console.log(data.items);
+      // console.log(data.items);
       callback(data.items);
     },
     error: function(data) {
